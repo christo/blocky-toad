@@ -189,7 +189,7 @@ class Game:
                 self.frog_pos = new_pos
                 if block.terrain is Terrain.GOAL:
                     self.goal(new_pos)
-                elif block.terrain is Terrain.FATAL and not self.rideable_at(new_pos):
+                elif block.terrain is Terrain.FATAL and self.rideable_at(new_pos):
                     self.die()  # glug
                 elif self.unrideable_at(new_pos):
                     self.die()  # splat
@@ -235,11 +235,11 @@ class Game:
 
     def rideable_at(self, pos):
         """Returns true iff the given position is currently occupied by a rideable vehicle"""
-        return list(filter(lambda v: v.rideable and v.collides_with(pos), self.vehicles))
+        return list(filter(lambda v: v.collides_with(pos) and v.rideable, self.vehicles))
 
     def unrideable_at(self, pos):
         """Returns true iff the given position is currently occupied by an UNrideable vehicle"""
-        return list(filter(lambda v: not v.rideable and v.collides_with(pos), self.vehicles))
+        return list(filter(lambda v: v.collides_with(pos) and not v.rideable, self.vehicles))
 
     def is_on_screen(self, pos):
         """Returns true iff the given position is within the playable game area."""
@@ -248,9 +248,11 @@ class Game:
         return 0 <= corrected_pos[Y] < len(rows) and 0 <= corrected_pos[X] < len(rows[corrected_pos[Y]])
 
     def recalculate_sizes(self, rows):
-        """Dynamically scale the size and layout of text, playfield etc., preserving
+        """
+        Dynamically scale the size and layout of text, playfield etc., preserving
         the aspect ratio and margins. Note that this is initialisation called from
-        the constructor (which is a bit naughty) but also on window resize and level up"""
+        the constructor (which is a bit naughty) but also on window resize and level up
+        """
 
         # calculate playfield size in blocks
         # find the widest row
