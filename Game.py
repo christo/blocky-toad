@@ -412,7 +412,7 @@ class Game:
                 sy = row * self.block_size + 2 + self.game_y
                 inset_width = self.block_size - 4
                 tl = (sx + 4, sy + 4)
-                tr = (sx + 4, sy + inset_width)
+                tr = (sx + inset_width, sy + 4)
                 bl = (sx + 4, sy + inset_width)
                 br = (sx + inset_width, sy + inset_width)
                 # draw rect outline
@@ -420,8 +420,8 @@ class Game:
                 pygame.draw.line(s, config.dark_grey, tr, br)
                 pygame.draw.line(s, config.dark_grey, br, bl)
                 pygame.draw.line(s, config.dark_grey, bl, tl)
-                self.draw_debug_text("%s,%s" % (sx, sy), sx, sy)
-                pygame.draw.line(self.screen, config.yellow, (sx, sy), (sx + 10, sy - 10))
+                self.draw_debug_text("%s,%s" % (sx, sy), sx + inset_width / 5, sy + inset_width / 2)
+                pygame.draw.line(self.screen, config.dark_grey, (sx, sy), (sx + 10, sy + 10))
 
         def ln(colour, y):
             pygame.draw.line(s, colour, (0, y), (sw, y))
