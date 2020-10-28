@@ -179,7 +179,6 @@ levels = [
 # starting level_num, 0 is the first
 start_level = 0
 
-# font from https://www.kreativekorp.com/software/fonts/c64.shtml
 font_name = "PetMe64.ttf"
 font_scale = 1.0
 
