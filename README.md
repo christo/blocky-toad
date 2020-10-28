@@ -13,9 +13,11 @@ and the license for it is included as per the terms therein.
 
 ## Features
 
+* Toads hopping
 * Dynamic playfield rescaling
 * Arbitrary sized and shaped levels
 * Configuration-driven
+* Zero cut scenes
 
 ## Instructions
 
