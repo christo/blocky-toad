@@ -4,9 +4,7 @@ Frogger, except instead of a frog it's a toad and instead of a toad, it's a bloc
 
 Tested with: Pygame 2.0 and Python 3.9
 
-Thanks to all the people on OldSkoolCoder's discord including:
-
-* [OldSkoolCoder](https://github.com/oldskoolcoder/)
+Thanks to all the people on the [OldSkoolCoder](https://github.com/oldskoolcoder/) Discord server.
 
 ## Instructions
 
