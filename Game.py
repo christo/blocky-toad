@@ -61,7 +61,7 @@ class Game:
         clock = pygame.time.Clock()
 
         while self.game_on:
-            clock.tick(30)
+            clock.tick(60)
             self.check_events()
             self.update()
             self.draw()

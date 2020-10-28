@@ -182,7 +182,7 @@ start_level = 0
 font_name = "PetMe64.ttf"
 font_scale = 1.0
 
-game_speed = 3
+game_speed = 1.5
 lives = 5
 
 # game play area as measured in blocks (aka sprite size)
