@@ -190,7 +190,9 @@ class Game:
                 if block.terrain is Terrain.GOAL:
                     self.goal(new_pos)
                 elif block.terrain is Terrain.FATAL and not self.rideable_at(new_pos):
-                    self.die()
+                    self.die()  # glug
+                elif self.unrideable_at(new_pos):
+                    self.die()  # splat
                 else:
                     # post-hop if frog is on a rideable vehicle, store that and frog offset from it
                     colliding = list(filter(lambda v: v.collides_with(new_pos), self.vehicles))
@@ -234,6 +236,10 @@ class Game:
     def rideable_at(self, pos):
         """Returns true iff the given position is currently occupied by a rideable vehicle"""
         return list(filter(lambda v: v.rideable and v.collides_with(pos), self.vehicles))
+
+    def unrideable_at(self, pos):
+        """Returns true iff the given position is currently occupied by an UNrideable vehicle"""
+        return list(filter(lambda v: not v.rideable and v.collides_with(pos), self.vehicles))
 
     def is_on_screen(self, pos):
         """Returns true iff the given position is within the playable game area."""
