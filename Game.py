@@ -371,7 +371,6 @@ class Game:
 
         # draw player
         inset = self.block_size * -0.4
-
         frog_rect = Rect(self.pos_to_pixels(self.frog_pos), self.block)
         frog = frog_rect.inflate(inset, inset).clip(self.playfield_clip())
         pygame.draw.rect(self.screen, config.frog_colour, frog)
@@ -395,14 +394,14 @@ class Game:
         self.draw_scoreboard(round(height - self.little_font.get_height() * 1.5))
 
     def draw_debug(self):
-        """draws a lot of stuff on the screen to show key lines and where the blocks are
-        just to help find problems with layout"""
+        """
+        Draws a lot of stuff on the screen to show key lines and where the blocks are
+        just to help find problems with layout
+        """
         scoreboard_bottom = self.scoreboard_top + self.little_font.get_height()
         s = self.screen
         sw = s.get_width()
         sh = s.get_height()
-        # game_area = Rect(self.game_x, self.game_y, self.game_width, self.game_height)
-        # pygame.draw.rect(s, config.light_grey, game_area)
         for row in range(self.playfield_hb):
             for block in range(self.playfield_wb):
                 sx = block * self.block_size + 2 + self.game_x
@@ -412,10 +411,11 @@ class Game:
                 tr = (sx + 4, sy + inset_width)
                 bl = (sx + 4, sy + inset_width)
                 br = (sx + inset_width, sy + inset_width)
-                pygame.draw.line(s, config.black, tl, tr)
-                pygame.draw.line(s, config.black, tr, br)
-                pygame.draw.line(s, config.black, br, bl)
-                pygame.draw.line(s, config.black, bl, tl)
+                # draw rect outline
+                pygame.draw.line(s, config.dark_grey, tl, tr)
+                pygame.draw.line(s, config.dark_grey, tr, br)
+                pygame.draw.line(s, config.dark_grey, br, bl)
+                pygame.draw.line(s, config.dark_grey, bl, tl)
                 self.draw_debug_text("%s,%s" % (sx, sy), sx, sy)
                 pygame.draw.line(self.screen, config.yellow, (sx, sy), (sx + 10, sy - 10))
 
