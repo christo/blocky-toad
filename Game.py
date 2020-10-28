@@ -278,8 +278,8 @@ class Game:
         self.game_width = self.block_size * self.playfield_wb
         self.game_height = self.block_size * self.playfield_hb
         # centre horizontally and vertically
-        self.game_x = math.floor((self.screen.get_width() - self.game_width) / 2)
-        self.game_y = math.floor((self.status_top - self.game_height + self.playfield_top) / 2)
+        self.game_x = f((self.screen.get_width() - self.game_width) / 2)
+        self.game_y = f((self.status_top - self.game_height + self.playfield_top) / 2)
 
     def current_level(self):
         return config.levels[self.level_num]["level"]
