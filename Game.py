@@ -94,8 +94,11 @@ class Game:
                 if self.is_on_screen(new_riding_pos):
                     self.frog_pos = new_riding_pos
                 elif not v.collides_with(self.frog_pos):
-                    # we have fallen off a vehicle
                     self.riding = None
+                    # we have fallen off a vehicle, probably to our death, but let's be sure
+                    block = self.current_level()[math.floor(self.frog_pos[Y])][math.floor(self.frog_pos[X])]
+                    if block.terrain is Terrain.FATAL:
+                        self.die()
             elif v.collides_with(self.frog_pos):
                 # we have a collision with a new vehicle
                 if v.rideable:
@@ -189,7 +192,7 @@ class Game:
                 self.frog_pos = new_pos
                 if block.terrain is Terrain.GOAL:
                     self.goal(new_pos)
-                elif block.terrain is Terrain.FATAL and self.rideable_at(new_pos):
+                elif block.terrain is Terrain.FATAL and not self.rideable_at(new_pos):
                     self.die()  # glug
                 elif self.unrideable_at(new_pos):
                     self.die()  # splat
@@ -243,9 +246,10 @@ class Game:
 
     def is_on_screen(self, pos):
         """Returns true iff the given position is within the playable game area."""
-        corrected_pos = (round(pos[X]), round(pos[Y]))
+        corrected_pos = (math.floor(pos[X]), math.floor(pos[Y]))
         rows = self.current_level()
-        return 0 <= corrected_pos[Y] < len(rows) and 0 <= corrected_pos[X] < len(rows[corrected_pos[Y]])
+        blocks = rows[corrected_pos[Y]]
+        return 0 <= corrected_pos[Y] < len(rows) and 0 <= corrected_pos[X] < len(blocks)
 
     def recalculate_sizes(self, rows):
         """
