@@ -4,26 +4,33 @@ Frogger, except instead of a frog it's a toad and instead of a toad, it's a bloc
 
 Tested with: Pygame 2.0 and Python 3.9
 
-Thanks to all the people on the [OldSkoolCoder](https://github.com/oldskoolcoder/) Discord server.
+Thanks to all the people on the [OldSkoolCoder](https://github.com/oldskoolcoder/) 
+Discord server.
 
-The font used is _PetMe64_ from [KreativeKorp](https://www.kreativekorp.com/software/fonts/c64.shtml) 
+The font used is _PetMe64_ from 
+[KreativeKorp](https://www.kreativekorp.com/software/fonts/c64.shtml) 
 and the license for it is included as per the terms therein. 
 
 ## Instructions
 
-Play the game with keys WASD or arrows, get the frogs to the goals before the time runs out.
+Play the game with keys WASD or arrows, get the frogs to the goals before the time
+runs out.
 
-The game is driven by the `config.py` script. You can change many things about the game in there including 
-defining levels of arbitrary size (and shape!). Look in that file for examples of the way levels are defined. You
- need to adhere to python syntax rules or probably everything will break. 
+The game is driven by the `config.py` script. You can change many things about the
+game in there including defining levels of arbitrary size (and shape!). Look in that
+file for examples of the way levels are defined. You need to adhere to python syntax
+rules or probably everything will break. 
 
 ## How to build
 
-`Game.py` can be run if you already have pygame installed. If that doesn't work, read on. 
+`Game.py` can be run if you already have pygame installed. If that doesn't work, 
+read on. 
 
-Install dependencies with pipenv by running the provided `install.sh` or if you know what you're doing... do that.
+Install dependencies with pipenv by running the provided `install.sh` or if you 
+know what you're doing... do that.
 
-Note that in order to run on macos I needed to use pygame 2.0 which is currently in pre-release.
+Note that in order to run on macos I needed to use pygame 2.0 which is currently
+in pre-release which necessitates the pipenv `--pre` option.
 
 Pull requests are encouraged!
 
