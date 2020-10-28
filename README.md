@@ -6,6 +6,9 @@ Tested with: Pygame 2.0 and Python 3.9
 
 Thanks to all the people on the [OldSkoolCoder](https://github.com/oldskoolcoder/) Discord server.
 
+The font used is _PetMe64_ from [KreativeKorp](https://www.kreativekorp.com/software/fonts/c64.shtml) 
+and the license for it is included as per the terms therein. 
+
 ## Instructions
 
 Play the game with keys WASD or arrows, get the frogs to the goals before the time runs out.

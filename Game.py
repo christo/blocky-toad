@@ -221,7 +221,8 @@ class Game:
     def die(self):
         """This froggy's gone to heaven..."""
         self.lives = self.lives - 1
-        print("died at %s; %s" % (self.frog_pos, self.vehicles))
+        if config.debug_mode:
+            print("died at %s; %s" % (self.frog_pos, self.vehicles))
         if self.lives <= 0:
             self.frog_pos = (-1, -1)  # move him off the screen
             self.game_state = GAME_OVER
