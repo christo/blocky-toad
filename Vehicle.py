@@ -45,7 +45,7 @@ class Vehicle:
         x = self.pos[0]
         x = x + self.vx * config.game_speed / 100
         self.pos = (x, self.pos[Y])
-        if x + self.width < 0 or x - self.width > scene_width_blocks:
+        if (x + self.width < 0 and self.vx < 0) or (x - self.width > scene_width_blocks and self.vx > 0):
             self.pos = self.initial_pos
 
     def collides_with(self, other) -> bool:

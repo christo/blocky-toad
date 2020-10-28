@@ -371,7 +371,8 @@ class Game:
             self.draw_debug_text("%s,%s" % (frog_rect.x, frog_rect.y), frog_rect.x, frog_rect.y)
 
     def draw_status(self):
-        time_left = max(0, math.ceil((self.timer - pygame.time.get_ticks()) / 1000))
+        max_time = config.levels[self.level_num]["time"]
+        time_left = max(0, min(max_time, math.ceil((self.timer - pygame.time.get_ticks()) / 1000)))
         text = "lives: %s    time: %d" % (self.lives, time_left)
         self.draw_fancy_text(self.little_font, text, self.screen.get_height() - self.little_font_size * 1.3)
 

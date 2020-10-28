@@ -53,6 +53,9 @@ car = VehicleSpawn(light_red, 1, 4, 0.5, False)
 bus = VehicleSpawn(yellow, 2, -2, 0.7, False)
 log = VehicleSpawn(brown, 3, 1, 0.7, True)
 log2 = VehicleSpawn(brown, 3, -1, 0.7, True)
+log3 = VehicleSpawn(brown, 4, 1.3, 0.7, True)
+log4 = VehicleSpawn(brown, 2, -0.9, 0.7, True)
+turtle1 = VehicleSpawn(red, 1, 1.3, 0.8, True)
 
 # define levels from blocks
 levels = [
@@ -104,10 +107,25 @@ levels = [
         "start": (10, 13),
         "spawns": [{
             "vehicle": log2,
-            "location": (6, 3)
+            "location": (20, 3)
         }, {
             "vehicle": log,
             "location": (-1, 2)
+        }, {
+            "vehicle": log3,
+            "location": (-1, 4)
+        }, {
+            "vehicle": log4,
+            "location": (20, 5)
+        }, {
+            "vehicle": turtle1,
+            "location": (-1, 6)
+        }, {
+            "vehicle": turtle1,
+            "location": (-2, 6)
+        }, {
+            "vehicle": turtle1,
+            "location": (-3, 6)
         }],
         "time": 120
     }, {
@@ -161,7 +179,7 @@ levels = [
 ]
 
 # starting level_num, 0 is the first
-start_level = 0
+start_level = 1
 
 # font from https://www.kreativekorp.com/software/fonts/c64.shtml
 font_name = "PetMe64.ttf"
