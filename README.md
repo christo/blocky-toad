@@ -42,8 +42,7 @@ Pull requests are encouraged!
 
 ## TODO 
 
-* BUG: when there are multiple VehicleSpawn objects defined on a row, they 
-separate from each other. Probably a rounding error.
+* BUG: frog does not fall off rideable at edge of screen but gets stuck
 * some kind of random spawn rate - need maybe min and max of uniform range
 * finish defining the levels so the game can be finished
 * add fly and other bonuses, maybe turtles etc.
