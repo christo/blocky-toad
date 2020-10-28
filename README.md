@@ -4,8 +4,8 @@ Frogger, except instead of a frog it's a toad and instead of a toad, it's a bloc
 
 Tested with: Pygame 2.0 and Python 3.9
 
-Thanks to all the people on the [OldSkoolCoder](https://github.com/oldskoolcoder/) 
-Discord server.
+Shout outs to all the people on the [OldSkoolCoder](https://github.com/oldskoolcoder/) 
+Discord server and thanks John for streaming the 6502 stuff.
 
 The font used is _PetMe64_ from 
 [KreativeKorp](https://www.kreativekorp.com/software/fonts/c64.shtml) 
