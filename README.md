@@ -13,7 +13,9 @@ and the license for it is included as per the terms therein.
 
 Play the game with keys WASD or arrows, get the frogs to the goals before the time runs out.
 
-The game is driven by the `config.py` script. You can change many things about the game in there including defining levels of arbitrary size. Look in that file for examples of the way levels are defined. You need to adhere to python syntax rules. 
+The game is driven by the `config.py` script. You can change many things about the game in there including 
+defining levels of arbitrary size (and shape!). Look in that file for examples of the way levels are defined. You
+ need to adhere to python syntax rules or probably everything will break. 
 
 ## How to build
 
