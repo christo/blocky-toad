@@ -19,10 +19,16 @@ defining levels of arbitrary size (and shape!). Look in that file for examples o
 
 ## How to build
 
+`Game.py` can be run if you already have pygame installed. If that doesn't work, read on. 
+
 Install dependencies with pipenv by running the provided `install.sh` or if you know what you're doing... do that.
 
 Note that in order to run on macos I needed to use pygame 2.0 which is currently in pre-release.
 
+Pull requests are encouraged!
+
 ## TODO 
 
 * some kind of random spawn rate - need maybe min and max of uniform range
+* finish defining the levels so the game can be finished
+* add fly and other bonuses, maybe turtles etc.
