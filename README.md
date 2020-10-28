@@ -14,10 +14,10 @@ The game is driven by the `config.py` script. You can change many things about t
 
 ## How to build
 
-Install dependencies with pipenv by running the provided `install.sh`. 
+Install dependencies with pipenv by running the provided `install.sh` or if you know what you're doing... do that.
 
 Note that in order to run on macos I needed to use pygame 2.0 which is currently in pre-release.
 
-# TODO 
+## TODO 
 
 * some kind of random spawn rate - need maybe min and max of uniform range
