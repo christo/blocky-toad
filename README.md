@@ -2,6 +2,8 @@
 
 Frogger, except instead of a frog it's a toad and instead of a toad, it's a block. 
 
+![Screenshot](screenshot.png)
+
 Tested with: Pygame 2.0 and Python 3.9
 
 Shout outs to all the people on the [OldSkoolCoder](https://github.com/oldskoolcoder/) 

@@ -59,8 +59,11 @@ turtles = VehicleSpec(red, 1, 0.8, True, 3)
 road_train = VehicleSpec(medium_grey, 3, 0.7, False, 2)
 
 # define levels from blocks
-slow_respawn = (5, 9)
-fast_respawn = (2, 5)
+slow_respawn = (7, 8)
+fast_respawn = (2, 4)
+
+# starting level_num, 0 is the first
+start_level = 0
 levels = [{
     "level": [
         seq(7, bush),
@@ -97,18 +100,23 @@ levels = [{
         seq(19, road),
         seq(19, road),
         seq(19, road),
+        seq(19, road),
         seq(19, path)
     ],
-    "start": (10, 13),
+    "start": (10, 14),
     "spawns": [
+        Spawn(log4, (-4, 2), 1, slow_respawn),
         Spawn(log3, (20, 3), -1, slow_respawn),
-        Spawn(log4, (-1, 2), 1, slow_respawn),
-        Spawn(log4, (-1, 4), 1.3, slow_respawn),
+        Spawn(log4, (-4, 4), 1.3, slow_respawn),
         Spawn(log2, (20, 5), -0.9, slow_respawn),
         Spawn(turtles, (-1, 6), 1.3, slow_respawn),
-        Spawn(road_train, (-6, 8), 3, slow_respawn)
+        Spawn(road_train, (-6, 8), 3, fast_respawn),
+        Spawn(car, (20, 9), -3.3, fast_respawn),
+        Spawn(bus, (20, 10), -2.3, slow_respawn),
+        Spawn(bus, (20, 11), -2.3, slow_respawn),
+        Spawn(car, (-1, 12), 4, fast_respawn),
     ],
-    "time": 120
+    "time": 180
 }, {
     "level": [
         seq(50, bush),
@@ -156,9 +164,6 @@ levels = [{
     ],
     "time": 240
 }]
-
-# starting level_num, 0 is the first
-start_level = 0
 
 font_name = "PetMe64.ttf"
 font_scale = 1.0

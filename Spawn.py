@@ -14,10 +14,10 @@ class Spawn:
         """
         Construct a Spawn point which emits vehicles of the given spec and speed at the given location
         on a random schedule specified by respawn.
-        :param spec:
-        :param location:
-        :param speed:
-        :param respawn:
+        :param spec: definition of the vehicles emitted.
+        :param location: block position tuple (x,y)[
+        :param speed: horizontal velocity[
+        :param respawn: tuple of min, max respawn seconds.
         """
         super().__init__()
         self.spec = spec
