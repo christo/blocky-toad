@@ -1,6 +1,7 @@
 from Block import Block
+from Spawn import Spawn
 from Terrain import Terrain
-from VehicleSpawn import VehicleSpawn
+from VehicleSpec import VehicleSpec
 from util import seq
 
 # initial window size in pixels
@@ -28,7 +29,7 @@ light_green = (170, 255, 102)
 light_blue = (0, 136, 255)
 light_grey = (187, 187, 187)
 
-croc_colour = medium_grey   # TODO crocodile
+croc_colour = medium_grey  # TODO crocodile
 frog_colour = light_green
 fly_colour = light_grey  # bonus at endzone TODO fly
 
@@ -49,132 +50,112 @@ road = Block(dark_grey, Terrain.HOPPABLE)
 goal = Block(blue, Terrain.GOAL)
 
 # define vehicles, including moving river objects
-car = VehicleSpawn(light_red, 1, 4, 0.5, False)
-bus = VehicleSpawn(yellow, 2, -2, 0.7, False)
-log = VehicleSpawn(brown, 3, 1, 0.7, True)
-log2 = VehicleSpawn(brown, 3, -1, 0.7, True)
-log3 = VehicleSpawn(brown, 4, 1.3, 0.7, True)
-log4 = VehicleSpawn(brown, 2, -0.9, 0.7, True)
-turtles = VehicleSpawn(red, 1, 1.3, 0.8, True, 3)
-road_train = VehicleSpawn(medium_grey, 3, 3, 0.7, False, 2)
+car = VehicleSpec(light_red, 1, 0.5, False)
+bus = VehicleSpec(yellow, 2, 0.7, False)
+log3 = VehicleSpec(brown, 3, 0.7, True)
+log4 = VehicleSpec(brown, 4, 0.7, True)
+log2 = VehicleSpec(brown, 2, 0.7, True)
+turtles = VehicleSpec(red, 1, 0.8, True, 3)
+road_train = VehicleSpec(medium_grey, 3, 0.7, False, 2)
 
 # define levels from blocks
-levels = [
-    {
-        "level": [
-            seq(7, bush),
-            [bush, goal, bush, goal, bush, goal, bush],
-            seq(7, river),
-            seq(7, river),
-            seq(7, path),
-            seq(7, road),
-            seq(7, road),
-            seq(7, path)
-        ],
-        "start": (3, 7),
-        "spawns": [{
-            "vehicle": bus,
-            "location": (9, 6)
-        }, {
-            "vehicle": car,
-            "location": (-1, 5)
-        }, {
-            "vehicle": log,
-            "location": (-3, 2)
-        }, {
-            "vehicle": log2,
-            "location": (7, 3)
-        }],
-        "time": 60
-    },
-    {
-        # this is the same layout as the original frogger
-        "level": [
-            seq(19, bush),
-            [bush, goal, bush, bush, bush, goal, bush, bush, bush, goal, bush, bush, bush, goal, bush, bush, bush, goal, bush],
-            seq(19, river),
-            seq(19, river),
-            seq(19, river),
-            seq(19, river),
-            seq(19, river),
-            seq(19, path),
-            seq(19, road),
-            seq(19, road),
-            seq(19, road),
-            seq(19, road),
-            seq(19, road),
-            seq(19, path)
-        ],
-        "start": (10, 13),
-        "spawns": [{
-            "vehicle": log2,
-            "location": (20, 3)
-        }, {
-            "vehicle": log,
-            "location": (-1, 2)
-        }, {
-            "vehicle": log3,
-            "location": (-1, 4)
-        }, {
-            "vehicle": log4,
-            "location": (20, 5)
-        }, {
-            "vehicle": turtles,
-            "location": (-1, 6)
-        }, {
-            "vehicle": road_train,
-            "location": (-6, 8)
-        }],
-        "time": 120
-    }, {
-        "level": [
-            seq(50, bush),
-            seq(10, [bush, bush, goal, bush, bush]),
-            seq(50, river),
-            seq(50, river),
-            seq(50, river),
-            seq(50, river),
-            seq(50, river),
-            seq(50, path),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, path),
-            seq(50, river),
-            seq(50, river),
-            seq(50, river),
-            seq(50, river),
-            seq(50, river),
-            seq(50, path),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, path),
-            seq(50, river),
-            seq(50, river),
-            seq(50, path),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, road),
-            seq(50, path)
-        ],
-        "start": (25, 37),
-        "spawns": [{
-            "vehicle": log2,
-            "location": (6, 3)
-        }],
-        "time": 240
-    }
-]
+slow_respawn = (5, 9)
+fast_respawn = (2, 5)
+levels = [{
+    "level": [
+        seq(7, bush),
+        [bush, goal, bush, goal, bush, goal, bush],
+        seq(7, river),
+        seq(7, river),
+        seq(7, path),
+        seq(7, road),
+        seq(7, road),
+        seq(7, path)
+    ],
+    "start": (3, 7),
+    "spawns": [
+        Spawn(bus, (9, 6), -2, slow_respawn),
+        Spawn(car, (-1, 5), 4, fast_respawn),
+        Spawn(log3, (-3, 2), 1, slow_respawn),
+        Spawn(log4, (7, 3), -1, slow_respawn)
+    ],
+    "time": 60
+}, {
+    # this is the same layout as the original frogger
+    "level": [
+        seq(19, bush),
+        [bush, goal, bush, bush, bush, goal, bush, bush, bush, goal, bush, bush, bush, goal, bush, bush,
+         bush, goal, bush],
+        seq(19, river),
+        seq(19, river),
+        seq(19, river),
+        seq(19, river),
+        seq(19, river),
+        seq(19, path),
+        seq(19, road),
+        seq(19, road),
+        seq(19, road),
+        seq(19, road),
+        seq(19, road),
+        seq(19, path)
+    ],
+    "start": (10, 13),
+    "spawns": [
+        Spawn(log3, (20, 3), -1, slow_respawn),
+        Spawn(log4, (-1, 2), 1, slow_respawn),
+        Spawn(log4, (-1, 4), 1.3, slow_respawn),
+        Spawn(log2, (20, 5), -0.9, slow_respawn),
+        Spawn(turtles, (-1, 6), 1.3, slow_respawn),
+        Spawn(road_train, (-6, 8), 3, slow_respawn)
+    ],
+    "time": 120
+}, {
+    "level": [
+        seq(50, bush),
+        seq(10, [bush, bush, goal, bush, bush]),
+        seq(50, river),
+        seq(50, river),
+        seq(50, river),
+        seq(50, river),
+        seq(50, river),
+        seq(50, path),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, path),
+        seq(50, river),
+        seq(50, river),
+        seq(50, river),
+        seq(50, river),
+        seq(50, river),
+        seq(50, path),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, path),
+        seq(50, river),
+        seq(50, river),
+        seq(50, path),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, road),
+        seq(50, path)
+    ],
+    "start": (25, 37),
+    "spawns": [
+        Spawn(log4, (6, 3), -1, slow_respawn)
+    ],
+    "time": 240
+}]
 
 # starting level_num, 0 is the first
 start_level = 0
@@ -182,7 +163,7 @@ start_level = 0
 font_name = "PetMe64.ttf"
 font_scale = 1.0
 
-game_speed = 1.5
+game_speed = 1.7
 lives = 5
 
 # game play area as measured in blocks (aka sprite size)

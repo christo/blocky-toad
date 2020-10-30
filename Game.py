@@ -86,9 +86,13 @@ class Game:
             self.game_state = GAME_OVER
             self.title_at = pygame.time.get_ticks() + 3000
 
+        for s in config.levels[self.level_num]["spawns"]:
+            s.update(lambda v_: self.vehicles.append(v_))
+
         # update all vehicles
         for v in self.vehicles:
-            v.update(self.playfield_wb)
+            if not v.update(self.playfield_wb):
+                self.vehicles.remove(v)
             if v == self.riding:
                 new_riding_pos = (self.riding.pos[X] + self.riding_x_offset, self.riding.pos[Y])
                 if self.is_on_screen(new_riding_pos):
@@ -101,7 +105,7 @@ class Game:
                         self.die()
             elif v.collides_with(self.frog_pos):
                 # we have a collision with a new vehicle
-                if v.rideable:
+                if v.is_rideable():
                     self.riding = v
                     self.riding_x_offset = v.pos[X] - self.frog_pos[X]
                 else:
@@ -144,7 +148,7 @@ class Game:
     def reset_vehicles(self):
         self.vehicles = []
         for s in config.levels[self.level_num]["spawns"]:
-            self.vehicles.append(s["vehicle"].spawn(s["location"]))
+            s.reset()
 
     def check_controls(self):
         """Obeying the controls timeout, check game-playing controls and update game in response"""
@@ -185,7 +189,8 @@ class Game:
 
         rows = self.current_level()
         if 0 <= new_y < len(rows) and 0 <= new_x < len(rows[new_y]):
-            block = rows[math.floor(new_y)][math.floor(new_x)]
+            # get the block we are jumping to
+            block = rows[round(new_y)][round(new_x)]
             # now check the block to see if it is passable
             new_pos = (new_x, new_y)
             if block.is_passable() and new_pos not in self.goals_reached:
@@ -196,17 +201,19 @@ class Game:
                     self.die()  # glug
                 elif self.unrideable_at(new_pos):
                     self.die()  # splat
+                    print("unrideable at %s,%s" % new_pos)
                 else:
-                    # post-hop if frog is on a rideable vehicle, store that and frog offset from it
-                    colliding = list(filter(lambda v: v.collides_with(new_pos), self.vehicles))
-                    if len(colliding) > 0:
-                        self.riding = list(colliding)[0]  # Highlander mode - there can be only one
-                        self.riding_x_offset = new_x - self.riding.pos[X]
-                    else:
-                        self.riding = None
+                    # post-hop we either have no vehicle or rideable (and if so, store frog offset from it)
+                    self.riding = self.vehicle_at(self.frog_pos)
+                    if self.riding is not None:
+                        self.riding_x_offset = self.frog_pos[X] - self.riding.pos[X]
         elif config.debug_mode:
             print("frog move prohibited: %s + %s" % (self.frog_pos, j,))
         self.obey_controls_at = pygame.time.get_ticks() + 100
+
+    def vehicle_at(self, pos):
+        l = list(filter(lambda v: v.collides_with(pos), self.vehicles))
+        return l[0] if len(l) > 0 else None
 
     def goal(self, pos):
         """Record achievement of the goal at pos"""
@@ -238,11 +245,11 @@ class Game:
 
     def rideable_at(self, pos):
         """Returns true iff the given position is currently occupied by a rideable vehicle"""
-        return list(filter(lambda v: v.collides_with(pos) and v.rideable, self.vehicles))
+        return len(list(filter(lambda v: v.collides_with(pos) and v.is_rideable(), self.vehicles))) > 0
 
     def unrideable_at(self, pos):
         """Returns true iff the given position is currently occupied by an UNrideable vehicle"""
-        return list(filter(lambda v: v.collides_with(pos) and not v.rideable, self.vehicles))
+        return len(list(filter(lambda v: v.collides_with(pos) and not v.is_rideable(), self.vehicles))) > 0
 
     def is_on_screen(self, pos):
         """Returns true iff the given position is within the playable game area."""
@@ -436,6 +443,7 @@ class Game:
         params = (self.playfield_wb, self.playfield_hb, self.block_size, sw, sh, gdy)
         dbg_txt = "blocks %sx%s @ %spx %sx%s | gdy: %s" % params
         self.draw_debug_text(dbg_txt, 10, sh)
+        self.draw_debug_text("%d vehicles" % len(self.vehicles), 50, 50)
 
     def draw_debug_text(self, dbg_txt, x, y):
         t = self.debug_font.render(dbg_txt, True, config.white, config.dark_grey)
