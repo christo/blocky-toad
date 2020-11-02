@@ -1,4 +1,5 @@
 from Block import Block
+from Level import Level
 from Spawn import Spawn
 from Terrain import Terrain
 from VehicleSpec import VehicleSpec
@@ -62,9 +63,31 @@ road_train = VehicleSpec(medium_grey, 3, 0.7, False, 2)
 slow_respawn = (7, 8)
 fast_respawn = (2, 4)
 
+lev = Level()
+lev.block('b', bush).block('~', river).block('#', path).block('.', road).block('_', goal)
+lev.spawn('B', bus, -2, slow_respawn)
+lev.spawn('C', car, 4, fast_respawn)
+lev.spawn('2', log2, -0.9, slow_respawn)
+lev.spawn('3', log3, 1, slow_respawn)
+lev.spawn('4', log4, -1, slow_respawn)
+lev.timer(60)
+
+
+# TODO figure out how to define the zero column (leftmost block?)
+lev4 = lev.read("""
+:bbbbbbb
+:b_b_b_b
+3~~~~~~~
+:~~~~~~~2
+:#######
+:.......
+:.......
+:#######
+""")
+
 # starting level_num, 0 is the first
 start_level = 0
-levels = [{
+levels = [lev4, {
     "level": [
         seq(7, bush),
         [bush, goal, bush, goal, bush, goal, bush],
