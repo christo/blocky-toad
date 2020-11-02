@@ -11,5 +11,3 @@ class VehicleSpec:
         self.rideable = rideable
         self.chain_length = chain_length
 
-    def spawn(self, location) -> Vehicle:
-        return Vehicle(self, location)

@@ -73,14 +73,12 @@ class Game:
     def update(self):
         """Main routine for advancing the game state intended to be called every frame"""
         self.high_score = max(self.score, self.high_score)
-        if self.game_state == PLAYING and self.got_all_goals():
-            self.next_level()
-        elif self.game_state == GET_READY and self.play_at < pygame.time.get_ticks():
+        if self.game_state == GET_READY and self.play_at < pygame.time.get_ticks():
             self.game_state = PLAYING
         elif self.game_state == GAME_OVER and self.title_at < pygame.time.get_ticks():
             self.game_state = TITLE
         elif self.game_state == LEVEL_COMPLETE and self.play_at < pygame.time.get_ticks():
-            self.get_ready()
+            self.next_level()
 
         if self.game_state == PLAYING and pygame.time.get_ticks() >= self.timer:
             self.game_state = GAME_OVER
@@ -212,20 +210,25 @@ class Game:
         self.obey_controls_at = pygame.time.get_ticks() + 100
 
     def vehicle_at(self, pos):
-        l = list(filter(lambda v: v.collides_with(pos), self.vehicles))
-        return l[0] if len(l) > 0 else None
+        ls = list(filter(lambda v: v.collides_with(pos), self.vehicles))
+        return ls[0] if len(ls) > 0 else None
 
     def goal(self, pos):
         """Record achievement of the goal at pos"""
         corrected_pos = (round(pos[X]), round(pos[Y]))  # jumping from vehicle gives fractional pos
         self.goals_reached.append(corrected_pos)
         self.score += 10
-        self.game_state = LEVEL_COMPLETE
-        self.play_at = pygame.time.get_ticks() + 1000
-        self.reset_frog()
+        if self.got_all_goals():
+            self.game_state = LEVEL_COMPLETE
+        else:
+            self.game_state = GET_READY
+            self.reset_frog()
+        self.play_at = pygame.time.get_ticks() + 2000
 
     def next_level(self):
         """proceed to the next game level"""
+        self.game_state = GET_READY
+        self.play_at = pygame.time.get_ticks() + 1000
         self.level_num = (self.level_num + 1) % len(config.levels)
         self.recalculate_sizes(self.current_level())
         self.start_level()

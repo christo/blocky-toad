@@ -4,6 +4,8 @@ import pygame
 
 from Vehicle import Vehicle
 
+# TODO make spawn happen on-screen but slide onto the screen accommodating vehicle width
+
 
 class Spawn:
     """
