@@ -160,7 +160,16 @@ levels = [{
     ],
     "start": (25, 37),
     "spawns": [
-        Spawn(log4, (6, 3), -1, slow_respawn)
+        Spawn(log4, (-4, 2), 1, slow_respawn),
+        Spawn(log3, (51, 3), -1, slow_respawn),
+        Spawn(log4, (-4, 4), 1.3, slow_respawn),
+        Spawn(turtles, (51, 5), -1.3, slow_respawn),
+        Spawn(log4, (-4, 6), 0.9, slow_respawn),
+        Spawn(road_train, (-6, 8), 3, fast_respawn),
+        Spawn(car, (51, 9), -3.3, fast_respawn),
+        Spawn(bus, (51, 10), -2.3, slow_respawn),
+        Spawn(bus, (51, 11), -2.3, slow_respawn),
+        Spawn(car, (-1, 12), 4, fast_respawn),
     ],
     "time": 240
 }]
