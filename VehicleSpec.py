@@ -1,7 +1,5 @@
 from Vehicle import Vehicle
 
-# TODO: make vehicle spawning randomised
-
 
 class VehicleSpec:
     """a kind template for making vehicles"""
