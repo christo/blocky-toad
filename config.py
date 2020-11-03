@@ -57,9 +57,12 @@ log4 = VehicleSpec(brown, 4, 0.7, True)
 log2 = VehicleSpec(brown, 2, 0.7, True)
 turtles = VehicleSpec(red, 1, 0.8, True, 3)
 road_train = VehicleSpec(medium_grey, 3, 0.7, False, 2)
+bus2 = VehicleSpec(orange, 3, 0.7, False)
+
 
 # define levels from blocks
 slow_respawn = (7, 8)
+slower_respawn = (9, 12)
 fast_respawn = (2, 4)
 
 # starting level_num, 0 is the first
@@ -168,10 +171,30 @@ levels = [{
         Spawn(road_train, (-6, 8), 3, fast_respawn),
         Spawn(car, (51, 9), -3.3, fast_respawn),
         Spawn(bus, (51, 10), -2.3, slow_respawn),
-        Spawn(bus, (51, 11), -2.3, slow_respawn),
+        Spawn(bus, (51, 11), -2.1, slow_respawn),
         Spawn(car, (-1, 12), 4, fast_respawn),
+        Spawn(log3, (51, 14), -2, fast_respawn),
+        Spawn(log3, (-3, 15), 2, fast_respawn),
+        Spawn(turtles, (51, 16), -1.3, slow_respawn),
+        Spawn(turtles, (-3, 17), 1.4, slow_respawn),
+        Spawn(turtles, (53, 18), -1.5, slow_respawn),
+        Spawn(car, (-1, 20), 5, slow_respawn),
+        Spawn(road_train, (-6, 21), 3.2, slow_respawn),
+        Spawn(road_train, (-6, 22), 1.2, slow_respawn),
+        Spawn(bus, (51, 23), -2.1, slow_respawn),
+        Spawn(bus, (51, 24), -2.4, slow_respawn),
+        Spawn(log4, (-4, 26), 0.9, slower_respawn),
+        Spawn(log4, (54, 27), -1.8, slow_respawn),
+        Spawn(car, (-1, 29), 5, slow_respawn),
+        Spawn(car, (-1, 30), 5, slow_respawn),
+        Spawn(bus2, (-3, 31), 2.5, slow_respawn),
+        Spawn(car, (-1, 32), 5.1, slow_respawn),
+        Spawn(road_train, (56, 33), -3.3, slower_respawn),
+        Spawn(car, (51, 34), -4.9, slower_respawn),
+        Spawn(car, (51, 35), -4.8, slower_respawn),
+        Spawn(car, (51, 36), -5.1, fast_respawn),
     ],
-    "time": 240
+    "time": 360
 }]
 
 font_name = "PetMe64.ttf"
